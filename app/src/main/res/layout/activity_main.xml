@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnVideo"
+    <TextView
+        android:id="@+id/textview_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dip"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/start" />
+    </LinearLayout>
+
+    <org.freedesktop.gstreamer.GStreamerSurfaceView
+        android:id="@+id/surface_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="117dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="32dp" />
+</LinearLayout>

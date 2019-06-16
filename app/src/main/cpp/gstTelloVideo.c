@@ -51,41 +51,6 @@ typedef struct _CustomData
     ANativeWindow *native_window; /* The Android native window where video will be rendered */
 } CustomData;
 
-JNIEXPORT jstring JNICALL
-Java_com_duvitech_tello_MainActivity_stringFromJNI( JNIEnv* env,
-                                                  jobject thiz )
-{
-#if defined(__arm__)
-    #if defined(__ARM_ARCH_7A__)
-    #if defined(__ARM_NEON__)
-      #if defined(__ARM_PCS_VFP)
-        #define ABI "armeabi-v7a/NEON (hard-float)"
-      #else
-        #define ABI "armeabi-v7a/NEON"
-      #endif
-    #else
-      #if defined(__ARM_PCS_VFP)
-        #define ABI "armeabi-v7a (hard-float)"
-      #else
-        #define ABI "armeabi-v7a"
-      #endif
-    #endif
-  #else
-   #define ABI "armeabi"
-  #endif
-#elif defined(__i386__)
-#define ABI "x86"
-#elif defined(__x86_64__)
-#define ABI "x86_64"
-#elif defined(__aarch64__)
-#define ABI "arm64-v8a"
-#else
-#define ABI "unknown"
-#endif
-
-    return (*env)->NewStringUTF(env, "Hello from JNI !  Compiled with ABI " ABI ".");
-}
-
 /* These global variables cache values which are not changing during execution */
 static pthread_t gst_app_thread;
 static pthread_key_t current_jni_env;
@@ -93,20 +58,13 @@ static JavaVM *java_vm;
 static jfieldID custom_data_field_id;
 static jmethodID set_message_method_id;
 static jmethodID on_gstreamer_initialized_method_id;
-static jstring
-gst_native_get_gstreamer_info (JNIEnv * env, jobject thiz)
-{
-    char *version_utf8 = gst_version_string ();
-    jstring *version_jstring = (*env)->NewStringUTF (env, version_utf8);
-    g_free (version_utf8);
-    return version_jstring;
-}
-
 
 /* Register this thread with the VM */
 static JNIEnv *
 attach_current_thread (void)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "attach_current_thread");
     JNIEnv *env;
     JavaVMAttachArgs args;
 
@@ -127,6 +85,8 @@ attach_current_thread (void)
 static void
 detach_current_thread (void *env)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "detach_current_thread");
     GST_DEBUG ("Detaching thread %p", g_thread_self ());
     (*java_vm)->DetachCurrentThread (java_vm);
 }
@@ -135,6 +95,8 @@ detach_current_thread (void *env)
 static JNIEnv *
 get_jni_env (void)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "get_jni_env");
     JNIEnv *env;
 
     if ((env = pthread_getspecific (current_jni_env)) == NULL) {
@@ -149,6 +111,8 @@ get_jni_env (void)
 static void
 set_ui_message (const gchar * message, CustomData * data)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "set_ui_message");
     JNIEnv *env = get_jni_env ();
     GST_DEBUG ("Setting message to: %s", message);
     jstring jmessage = (*env)->NewStringUTF (env, message);
@@ -164,6 +128,8 @@ set_ui_message (const gchar * message, CustomData * data)
 static void
 error_cb (GstBus * bus, GstMessage * msg, CustomData * data)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "error_cb");
     GError *err;
     gchar *debug_info;
     gchar *message_string;
@@ -183,6 +149,8 @@ error_cb (GstBus * bus, GstMessage * msg, CustomData * data)
 static void
 state_changed_cb (GstBus * bus, GstMessage * msg, CustomData * data)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "state_changed_cb");
     GstState old_state, new_state, pending_state;
     gst_message_parse_state_changed (msg, &old_state, &new_state, &pending_state);
     /* Only pay attention to messages coming from the pipeline, not its children */
@@ -199,6 +167,8 @@ state_changed_cb (GstBus * bus, GstMessage * msg, CustomData * data)
 static void
 check_initialization_complete (CustomData * data)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "check_initialization_complete");
     JNIEnv *env = get_jni_env ();
     if (!data->initialized && data->native_window && data->main_loop) {
         GST_DEBUG
@@ -223,6 +193,8 @@ check_initialization_complete (CustomData * data)
 static void *
 app_function (void *userdata)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "app_function");
     JavaVMAttachArgs args;
     GstBus *bus;
     CustomData *data = (CustomData *) userdata;
@@ -299,10 +271,12 @@ app_function (void *userdata)
 static void
 gst_native_init (JNIEnv * env, jobject thiz)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_init");
     CustomData *data = g_new0 (CustomData, 1);
     SET_CUSTOM_DATA (env, thiz, custom_data_field_id, data);
     GST_DEBUG_CATEGORY_INIT (debug_category, "gstTelloVideo", 0,
-                             "gstTelloVideo");
+                             "Android Tello");
     gst_debug_set_threshold_for_name ("gstTelloVideo", GST_LEVEL_DEBUG);
     GST_DEBUG ("Created CustomData at %p", data);
     data->app = (*env)->NewGlobalRef (env, thiz);
@@ -314,6 +288,8 @@ gst_native_init (JNIEnv * env, jobject thiz)
 static void
 gst_native_finalize (JNIEnv * env, jobject thiz)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_finalize");
     CustomData *data = GET_CUSTOM_DATA (env, thiz, custom_data_field_id);
     if (!data)
         return;
@@ -333,6 +309,8 @@ gst_native_finalize (JNIEnv * env, jobject thiz)
 static void
 gst_native_play (JNIEnv * env, jobject thiz)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_play");
     CustomData *data = GET_CUSTOM_DATA (env, thiz, custom_data_field_id);
     if (!data)
         return;
@@ -344,6 +322,8 @@ gst_native_play (JNIEnv * env, jobject thiz)
 static void
 gst_native_pause (JNIEnv * env, jobject thiz)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_pause");
     CustomData *data = GET_CUSTOM_DATA (env, thiz, custom_data_field_id);
     if (!data)
         return;
@@ -355,6 +335,8 @@ gst_native_pause (JNIEnv * env, jobject thiz)
 static jboolean
 gst_native_class_init (JNIEnv * env, jclass klass)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_class_init");
     custom_data_field_id =
             (*env)->GetFieldID (env, klass, "native_custom_data", "J");
     set_message_method_id =
@@ -377,6 +359,9 @@ gst_native_class_init (JNIEnv * env, jclass klass)
 static void
 gst_native_surface_init (JNIEnv * env, jobject thiz, jobject surface)
 {
+
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_surface_init");
     CustomData *data = GET_CUSTOM_DATA (env, thiz, custom_data_field_id);
     if (!data)
         return;
@@ -399,14 +384,18 @@ gst_native_surface_init (JNIEnv * env, jobject thiz, jobject surface)
             data->initialized = FALSE;
         }
     }
+
     data->native_window = new_native_window;
 
     check_initialization_complete (data);
+
 }
 
 static void
 gst_native_surface_finalize (JNIEnv * env, jobject thiz)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "gst_native_surface_finalize");
     CustomData *data = GET_CUSTOM_DATA (env, thiz, custom_data_field_id);
     if (!data)
         return;
@@ -423,11 +412,8 @@ gst_native_surface_finalize (JNIEnv * env, jobject thiz)
     data->initialized = FALSE;
 }
 
-
-
 /* List of implemented native methods */
 static JNINativeMethod native_methods[] = {
-        {"nativeGetGStreamerInfo", "()Ljava/lang/String;", (void *) gst_native_get_gstreamer_info},
         {"nativeInit", "()V", (void *) gst_native_init},
         {"nativeFinalize", "()V", (void *) gst_native_finalize},
         {"nativePlay", "()V", (void *) gst_native_play},
@@ -441,8 +427,9 @@ static JNINativeMethod native_methods[] = {
 jint
 JNI_OnLoad (JavaVM * vm, void *reserved)
 {
+    __android_log_print (ANDROID_LOG_DEBUG, "gstTelloVideo",
+                         "JNI_OnLoad");
     JNIEnv *env = NULL;
-
     java_vm = vm;
 
     if ((*vm)->GetEnv (vm, (void **) &env, JNI_VERSION_1_4) != JNI_OK) {
@@ -450,8 +437,8 @@ JNI_OnLoad (JavaVM * vm, void *reserved)
                              "Could not retrieve JNIEnv");
         return 0;
     }
-    jclass klass = (*env)->FindClass (env,
-                                      "com/duvitech/tello/MainActivity");
+
+    jclass klass = (*env)->FindClass (env, "com/duvitech/tello/MainActivity");
     (*env)->RegisterNatives (env, klass, native_methods,
                              G_N_ELEMENTS (native_methods));
 

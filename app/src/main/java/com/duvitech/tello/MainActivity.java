@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duvitech.network.udp.UDPClient;
@@ -19,10 +22,10 @@ import org.freedesktop.gstreamer.GStreamer;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements SurfaceHolder.Callback{
 
     private static final String TAG = "TelloDemo";
-    private native String nativeGetGStreamerInfo();
+
     private native void nativeInit();     // Initialize native code, build pipeline, etc
     private native void nativeFinalize(); // Destroy pipeline and shutdown native code
     private native void nativePlay();     // Set pipeline to PLAYING
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private native void nativeSurfaceFinalize();
     private long native_custom_data;      // Native code will use this to keep private data
 
+    private boolean is_playing_desired;   // Whether the user asked to go to PLAYING
     private Button btnVideo;
 
     UDPVideoServer vid;
@@ -61,15 +65,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            GStreamer.init(this);
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
+
         btnVideo = findViewById(R.id.btnVideo);
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(vid == null) {
                     try {
-                        vid = new UDPVideoServer();
-                        vid.start();
+                        is_playing_desired = true;
+                        nativePlay();
                         byte[] cmd = new String("streamon".getBytes(), "UTF-8").getBytes();
                         client.sendBytes(cmd);
                         btnVideo.setText("Stop");
@@ -80,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         byte[] cmd = new String("streamoff".getBytes(), "UTF-8").getBytes();
                         client.sendBytes(cmd);
-                        vid.stopServer();
-                        vid = null;
+                        is_playing_desired = false;
+                        nativePause();
                         btnVideo.setText("Start");
                     } catch (Exception ex) {
                         Log.e(TAG, "Vid Server Error: " + ex.getMessage());
@@ -92,7 +105,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Log.d(TAG, stringFromJNI());
+        SurfaceView sv = (SurfaceView) this.findViewById(R.id.surface_video);
+        SurfaceHolder sh = sv.getHolder();
+        sh.addCallback(this);
+
+        if (savedInstanceState != null) {
+            is_playing_desired = savedInstanceState.getBoolean("playing");
+            Log.i ("GStreamer", "Activity created. Saved state is playing:" + is_playing_desired);
+        } else {
+            is_playing_desired = false;
+            Log.i ("GStreamer", "Activity created. There is no saved state, playing: false");
+        }
+
 
         try {
             client = new UDPClient();
@@ -103,17 +127,22 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "Comm Error: " +ex.getMessage());
         }
 
-        try {
-            GStreamer.init(this);
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
-        Log.d(TAG, "Welcome to " + nativeGetGStreamerInfo() + " !");
         getGameControllerIds();
+        nativeInit();
     }
+
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d ("GStreamer", "Saving state, playing:" + is_playing_desired);
+        outState.putBoolean("playing", is_playing_desired);
+    }
+
+
+    protected void onDestroy() {
+        nativeFinalize();
+        super.onDestroy();
+    }
+
 
     private static float getCenteredAxis(MotionEvent event,
                                          InputDevice device, int axis, int historyPos) {
@@ -298,22 +327,62 @@ public class MainActivity extends AppCompatActivity {
                 || keyCode == KeyEvent.KEYCODE_BUTTON_A;
     }
 
-    public native String  stringFromJNI();
 
     // Called from native code. Native code calls this once it has created its pipeline and
     // the main loop is running, so it is ready to accept commands.
     private void onGStreamerInitialized () {
         Log.i ("GStreamer", "Gst initialized");
+        // Restore previous playing state
+        if (is_playing_desired) {
+            nativePlay();
+        } else {
+            nativePause();
+        }
 
+        // Re-enable buttons, now that GStreamer is initialized
+        final Activity activity = this;
+        runOnUiThread(new Runnable() {
+            public void run() {
+                Button btnTemp = activity.findViewById(R.id.btnVideo);
+                if(is_playing_desired){
+                    btnTemp.setText("Stop");
+                }else{
+                    btnTemp.setText("Start");
+                }
+            }
+        });
     }
     // Called from native code. This sets the content of the TextView from the UI thread.
     private void setMessage(final String message) {
         Log.i ("GStreamer", "Set UI Message");
+        final TextView tv = (TextView) this.findViewById(R.id.textview_message);
+        runOnUiThread (new Runnable() {
+            public void run() {
+                tv.setText(message);
+            }
+        });
 
     }
 
     static {
         System.loadLibrary("gstreamer_android");
         System.loadLibrary("gstTelloVideo");
+        nativeClassInit();
+    }
+
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,
+                               int height) {
+        Log.d("GStreamer", "Surface changed to format " + format + " width "
+                + width + " height " + height);
+        nativeSurfaceInit (holder.getSurface());
+    }
+
+    public void surfaceCreated(SurfaceHolder holder) {
+        Log.d("GStreamer", "Surface created: " + holder.getSurface());
+    }
+
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.d("GStreamer", "Surface destroyed");
+        nativeSurfaceFinalize ();
     }
 }
