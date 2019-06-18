@@ -19,12 +19,24 @@ public class UDPClient {
     public void sendCommand(String msg) {
         CommandThread commandThread = new CommandThread(address, socket, msg);
         commandThread.start();
+        try {
+            commandThread.join();
+            Log.d(TAG, "Thread Finished");
+        }catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
 
     public void sendBytes(byte[] bytes) {
         CommandThread commandThread = new CommandThread(address, socket, bytes);
         commandThread.start();
+        try {
+            commandThread.join();
+            Log.d(TAG, "Thread Finished");
+        }catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     public void close() {
