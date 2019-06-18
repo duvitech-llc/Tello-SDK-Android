@@ -21,7 +21,6 @@ public class UDPClient {
         commandThread.start();
         try {
             commandThread.join();
-            Log.d(TAG, "Thread Finished");
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }
@@ -33,7 +32,6 @@ public class UDPClient {
         commandThread.start();
         try {
             commandThread.join();
-            Log.d(TAG, "Thread Finished");
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }

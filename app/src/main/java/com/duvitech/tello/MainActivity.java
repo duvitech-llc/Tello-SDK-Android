@@ -1,8 +1,10 @@
 package com.duvitech.tello;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,7 @@ import org.freedesktop.gstreamer.GStreamer;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends Activity implements SurfaceHolder.Callback{
@@ -217,9 +220,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
                 MotionEvent.AXIS_RZ, historyPos);
 
         // Update the ship object based on the new x and y values
-        Log.d("GC", "LS-X: " + lx + " LS-Y: " + ly);
-        Log.d("GC", "HT-X: " + hx + " HT-Y: " + hy);
-        Log.d("GC", "RS-X: " + rx + " RS-Y: " + ry);
+        // Log.d("GC", "LS-X: " + lx + " LS-Y: " + ly);
+        // Log.d("GC", "HT-X: " + hx + " HT-Y: " + hy);
+        // Log.d("GC", "RS-X: " + rx + " RS-Y: " + ry);
         if (client != null) {
             int d = (int)(lx * 100.0);
             int c = (int)(ly * -100.0);
@@ -247,6 +250,22 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
             Log.e(TAG,"Client is NULL");
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "Back Button Pressed");
+        onStop();
+        finish();
+        ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        if(am != null) {
+            List<ActivityManager.AppTask> tasks = am.getAppTasks();
+            if (tasks != null && tasks.size() > 0) {
+                tasks.get(0).setExcludeFromRecents(true);
+            }
+        }
+        // android.os.Process.killProcess(android.os.Process.myPid());
+        super.onBackPressed();
     }
 
     @Override
