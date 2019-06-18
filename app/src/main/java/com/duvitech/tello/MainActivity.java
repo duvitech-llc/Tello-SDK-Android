@@ -326,22 +326,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
                             client.sendCommand("land");
 
                         break;
-                    case KeyEvent.KEYCODE_DPAD_LEFT:
-                        handled = true;
-
-                        break;
-                    case KeyEvent.KEYCODE_DPAD_RIGHT:
-                        handled = true;
-
-                        break;
-                    case KeyEvent.KEYCODE_DPAD_UP:
-                        handled = true;
-
-                        break;
-                    case KeyEvent.KEYCODE_DPAD_DOWN:
-                        handled = true;
-
-                        break;
                     default:
                         if (isFireKey(keyCode)) {
                             // Update the ship object to fire lasers
