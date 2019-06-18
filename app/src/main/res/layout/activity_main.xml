@@ -11,12 +11,12 @@
         android:id="@+id/textview_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dip"
+        android:layout_marginBottom="4dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
@@ -24,14 +24,14 @@
             android:id="@+id/btnVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="4dp"
             android:text="@string/start" />
     </LinearLayout>
 
     <org.freedesktop.gstreamer.GStreamerSurfaceView
         android:id="@+id/surface_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="2dp" />
 </LinearLayout>

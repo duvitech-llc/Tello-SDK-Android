@@ -1,6 +1,8 @@
 package com.duvitech.tello;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,9 @@ import com.duvitech.network.udp.UDPVideoServer;
 import org.freedesktop.gstreamer.GStreamer;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class MainActivity extends Activity implements SurfaceHolder.Callback{
 
@@ -38,8 +42,22 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
     private boolean is_playing_desired;   // Whether the user asked to go to PLAYING
     private Button btnVideo;
 
+    private BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
     UDPVideoServer vid;
     UDPClient client;
+
+    // Get paired devices.
+    public void getPairedBluetoothDevices() {
+        Set<BluetoothDevice> pairedDevices = bAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            // There are paired devices. Get the name and address of each paired device.
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+                Log.d("BT DEVICES", "Device Name: " + deviceName + " Address: " + deviceHardwareAddress);
+            }
+        }
+    }
 
     public ArrayList<Integer> getGameControllerIds() {
         ArrayList<Integer> gameControllerDeviceIds = new ArrayList<Integer>();
@@ -83,19 +101,19 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
                     try {
                         is_playing_desired = true;
                         nativePlay();
-                        byte[] cmd = new String("streamon".getBytes(), "UTF-8").getBytes();
+                        byte[] cmd = new String("streamon".getBytes(), StandardCharsets.UTF_8).getBytes();
                         client.sendBytes(cmd);
-                        btnVideo.setText("Stop");
+                        btnVideo.setText(getString(R.string.stop_video));
                     } catch (Exception ex) {
                         Log.e(TAG, "Vid Server Error: " + ex.getMessage());
                     }
                 }else{
                     try {
-                        byte[] cmd = new String("streamoff".getBytes(), "UTF-8").getBytes();
+                        byte[] cmd = new String("streamoff".getBytes(), StandardCharsets.UTF_8).getBytes();
                         client.sendBytes(cmd);
                         is_playing_desired = false;
                         nativePause();
-                        btnVideo.setText("Start");
+                        btnVideo.setText(getString(R.string.start_video));
                     } catch (Exception ex) {
                         Log.e(TAG, "Vid Server Error: " + ex.getMessage());
                     }
@@ -120,13 +138,14 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback{
 
         try {
             client = new UDPClient();
-            byte[] cmd = new String("command".getBytes(), "UTF-8").getBytes();
+            byte[] cmd = new String("command".getBytes(), StandardCharsets.UTF_8).getBytes();
             client.sendBytes(cmd);
 
         }catch(Exception ex){
             Log.e(TAG, "Comm Error: " +ex.getMessage());
         }
 
+        getPairedBluetoothDevices();
         getGameControllerIds();
         nativeInit();
     }
