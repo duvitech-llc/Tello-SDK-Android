@@ -15,9 +15,13 @@ android {
                 // Use the following syntax when passing arguments to variables:
                 // arguments "-DVAR_NAME=ARGUMENT".
                 arguments "-DANDROID_STL=c++_shared"
-                abiFilters  'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+
             }
         }
+        ndk {
+            abiFilters  'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+
     }
     buildTypes {
         release {
@@ -38,6 +42,10 @@ android {
         cmake {
             path file('src/main/cpp/CMakeLists.txt')
         }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 

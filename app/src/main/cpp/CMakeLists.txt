@@ -14,7 +14,7 @@ set_target_properties( # Specifies the target library.
         PROPERTIES IMPORTED_LOCATION
 
         # Provides the path to the library you want to import.
-        ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libgstreamer_android.so )
+        ${CMAKE_CURRENT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libgstreamer_android.so )
 
 message( ${ANDROID_ABI} )
 IF(${ANDROID_ABI} STREQUAL armeabi-v7a)
