@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
+message("Starting Build")
+
 add_library(gstTelloVideo SHARED
             gstTelloVideo.c)
 
@@ -18,21 +20,21 @@ set_target_properties( # Specifies the target library.
 
 message( ${ANDROID_ABI} )
 IF(${ANDROID_ABI} STREQUAL armeabi-v7a)
-    include_directories(D:/Android/gst-sdk-1.16/armv7/lib/glib-2.0/include)
-    include_directories(D:/Android/gst-sdk-1.16/armv7/include/glib-2.0)
-    include_directories(D:/Android/gst-sdk-1.16/armv7/include/gstreamer-1.0)
+    include_directories(D:/Android/gst-1.16.0/armv7/lib/glib-2.0/include)
+    include_directories(D:/Android/gst-1.16.0/armv7/include/glib-2.0)
+    include_directories(D:/Android/gst-1.16.0/armv7/include/gstreamer-1.0)
 ELSEIF(${ANDROID_ABI} STREQUAL arm64-v8a)
-    include_directories(D:/Android/gst-sdk-1.16/arm64/lib/glib-2.0/include)
-    include_directories(D:/Android/gst-sdk-1.16/arm64/include/glib-2.0)
-    include_directories(D:/Android/gst-sdk-1.16/arm64/include/gstreamer-1.0)
+    include_directories(D:/Android/gst-1.16.0/arm64/lib/glib-2.0/include)
+    include_directories(D:/Android/gst-1.16.0/arm64/include/glib-2.0)
+    include_directories(D:/Android/gst-1.16.0/arm64/include/gstreamer-1.0)
 ELSEIF(${ANDROID_ABI} STREQUAL x86)
-    include_directories(D:/Android/gst-sdk-1.16/x86/lib/glib-2.0/include)
-    include_directories(D:/Android/gst-sdk-1.16/x86/include/glib-2.0)
-    include_directories(D:/Android/gst-sdk-1.16/x86/include/gstreamer-1.0)
+    include_directories(D:/Android/gst-1.16.0/x86/lib/glib-2.0/include)
+    include_directories(D:/Android/gst-1.16.0/x86/include/glib-2.0)
+    include_directories(D:/Android/gst-1.16.0/x86/include/gstreamer-1.0)
 ELSEIF(${ANDROID_ABI} STREQUAL x86_64)
-    include_directories(D:/Android/gst-sdk-1.16/x86_64/lib/glib-2.0/include)
-    include_directories(D:/Android/gst-sdk-1.16/x86_64/include/glib-2.0)
-    include_directories(D:/Android/gst-sdk-1.16/x86_64/include/gstreamer-1.0)
+    include_directories(D:/Android/gst-1.16.0/x86_64/lib/glib-2.0/include)
+    include_directories(D:/Android/gst-1.16.0/x86_64/include/glib-2.0)
+    include_directories(D:/Android/gst-1.16.0/x86_64/include/gstreamer-1.0)
 ENDIF()
 
 # Include libraries needed for tutorial1 lib
