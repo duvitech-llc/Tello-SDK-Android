@@ -5,7 +5,7 @@ import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.InputDevice;
@@ -23,7 +23,6 @@ import com.duvitech.network.udp.UDPVideoServer;
 
 import org.freedesktop.gstreamer.GStreamer;
 
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
