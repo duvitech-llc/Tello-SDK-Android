@@ -6,15 +6,16 @@ Created an Android Application that will control the Tello Drone with a BT Gamep
 
 Using Gstreamer to get the video stream back to the phone with low latency.
 
-Currently tested and validated on
+Currently tested and validated on:
 
-Pixel 		Android 9
-Nexus 5x 	Android 8
-Nexus 6		Android 7
+* Pixel 		Android 9
+* Nexus 5x 	Android 8
+* Nexus 6		Android 7
 
 
-Failing on 
-Pixel 3		Android 10
-Pixel 2		Android 10
+Not Working On: 
+
+* Pixel 3		Android 10
+* Pixel 2		Android 10
 
 I believe the failures are to do with the Android 10 operating system, need to investigate.
