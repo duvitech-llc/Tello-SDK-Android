@@ -1,0 +1,3 @@
+ninja: Entering directory `C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\.cxx\cmake\debug\x86'
+[1/2] Building C object CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o
+[2/2] Linking C shared library C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\build\intermediates\cmake\debug\obj\x86\libgstTelloVideo.so

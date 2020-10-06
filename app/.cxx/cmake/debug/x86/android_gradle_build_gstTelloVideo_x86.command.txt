@@ -1,0 +1,7 @@
+Executable : C:\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\.cxx\cmake\debug\x86
+gstTelloVideo
+jvmArgs : 
+

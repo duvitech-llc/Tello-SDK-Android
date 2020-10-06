@@ -1,0 +1,22 @@
+Executable : C:\Android\Sdk\cmake\3.10.2.4988404\bin\cmake.exe
+arguments : 
+-HC:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\src\main\cpp
+-DCMAKE_FIND_ROOT_PATH=C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\.cxx\cmake\debug\prefab\armeabi-v7a\prefab
+-DCMAKE_BUILD_TYPE=Debug
+-DCMAKE_TOOLCHAIN_FILE=C:\Android\Sdk\ndk\21.0.6113669\build\cmake\android.toolchain.cmake
+-DANDROID_ABI=armeabi-v7a
+-DANDROID_NDK=C:\Android\Sdk\ndk\21.0.6113669
+-DANDROID_PLATFORM=android-22
+-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
+-DCMAKE_ANDROID_NDK=C:\Android\Sdk\ndk\21.0.6113669
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\build\intermediates\cmake\debug\obj\armeabi-v7a
+-DCMAKE_MAKE_PROGRAM=C:\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_SYSTEM_VERSION=22
+-DANDROID_STL=c++_shared
+-BC:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\.cxx\cmake\debug\armeabi-v7a
+-GNinja
+jvmArgs : 
+
+Build command args:

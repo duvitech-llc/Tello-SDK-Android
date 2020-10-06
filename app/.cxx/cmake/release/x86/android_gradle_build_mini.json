@@ -1,0 +1,22 @@
+{
+  "buildFiles": [
+    "C:\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
+    "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" clean"
+  ],
+  "buildTargetsCommand": "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "gstTelloVideo-Release-x86": {
+      "artifactName": "gstTelloVideo",
+      "buildCommand": "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" gstTelloVideo",
+      "abi": "x86",
+      "output": "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libgstTelloVideo.so",
+      "runtimeFiles": [
+        "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\gst-build-x86\\libgstreamer_android.so"
+      ]
+    }
+  }
+}

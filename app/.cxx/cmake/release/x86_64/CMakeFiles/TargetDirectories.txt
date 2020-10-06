@@ -1,0 +1,3 @@
+C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/.cxx/cmake/release/x86_64/CMakeFiles/gstTelloVideo.dir
+C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/.cxx/cmake/release/x86_64/CMakeFiles/edit_cache.dir
+C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/.cxx/cmake/release/x86_64/CMakeFiles/rebuild_cache.dir

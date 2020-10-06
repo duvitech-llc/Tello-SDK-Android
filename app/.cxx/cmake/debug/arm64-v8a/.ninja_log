@@ -1,0 +1,26 @@
+# ninja log v5
+0	5	0	clean	51fc49043a1d8360
+0	2174	623612746	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+2178	2304	623612746	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	554b4f983be3bf8e
+0	8	0	clean	51fc49043a1d8360
+3	348	623613360	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+348	482	623613360	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	554b4f983be3bf8e
+2	61	623613588	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	554b4f983be3bf8e
+0	6	0	clean	51fc49043a1d8360
+3	220	623614126	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+220	296	623614126	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+2	74	623617945	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+0	6	0	clean	51fc49043a1d8360
+3	224	623617972	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+225	285	623617972	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+0	7	0	clean	51fc49043a1d8360
+4	290	623618216	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+290	413	623618216	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+0	6	0	clean	51fc49043a1d8360
+2	226	623618617	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+226	299	623618617	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+0	7	0	clean	51fc49043a1d8360
+2	210	623619049	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	2e42b49178a83968
+210	290	623619049	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+2	87	623619494	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6
+3	103	623629412	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/arm64-v8a/libgstTelloVideo.so	9d0f3386810856f6

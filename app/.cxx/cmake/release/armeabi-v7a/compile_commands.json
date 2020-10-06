@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "C:\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=armv7-none-linux-androideabi22 --gcc-toolchain=C:/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DgstTelloVideo_EXPORTS -ID:/Android/gstreamer-1.16.2/armv7/lib/glib-2.0/include -ID:/Android/gstreamer-1.16.2/armv7/include/glib-2.0 -ID:/Android/gstreamer-1.16.2/armv7/include/gstreamer-1.0  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\gstTelloVideo.dir\\gstTelloVideo.c.o   -c C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\src\\main\\cpp\\gstTelloVideo.c",
+  "file": "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\src\\main\\cpp\\gstTelloVideo.c"
+}
+]

@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\.cxx\cmake\debug\armeabi-v7a'
+[1/1] Linking C shared library C:\CURRENT-WORK\duvitech\Tello-SDK-Android\app\build\intermediates\cmake\debug\obj\armeabi-v7a\libgstTelloVideo.so

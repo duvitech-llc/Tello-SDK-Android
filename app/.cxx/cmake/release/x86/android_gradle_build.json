@@ -1,0 +1,45 @@
+{
+  "stringTable": {
+    "0": "C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/.cxx/cmake/release/x86",
+    "1": "--target=i686-none-linux-android22 --gcc-toolchain=C:/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DgstTelloVideo_EXPORTS -ID:/Android/gstreamer-1.16.2/x86/lib/glib-2.0/include -ID:/Android/gstreamer-1.16.2/x86/include/glib-2.0 -ID:/Android/gstreamer-1.16.2/x86/include/gstreamer-1.0 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O2 -DNDEBUG -fPIC"
+  },
+  "buildFiles": [
+    "C:\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
+    "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" clean"
+  ],
+  "buildTargetsCommand": "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "gstTelloVideo-Release-x86": {
+      "buildCommand": "C:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\.cxx\\cmake\\release\\x86\" gstTelloVideo",
+      "buildType": "release",
+      "toolchain": "3073658321",
+      "abi": "x86",
+      "artifactName": "gstTelloVideo",
+      "files": [
+        {
+          "src": "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\src\\main\\cpp\\gstTelloVideo.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libgstTelloVideo.so",
+      "runtimeFiles": [
+        "C:\\CURRENT-WORK\\duvitech\\Tello-SDK-Android\\app\\gst-build-x86\\libgstreamer_android.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "3073658321": {
+      "cCompilerExecutable": "C:\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

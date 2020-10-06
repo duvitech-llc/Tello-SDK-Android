@@ -1,5 +1,3 @@
-package org.freedesktop.gstreamer.androidmedia;
-
 /*
  * Copyright (C) 2012, Collabora Ltd.
  *   Author: Youness Alaoui
@@ -22,6 +20,8 @@ package org.freedesktop.gstreamer.androidmedia;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
  *
  */
+
+package org.freedesktop.gstreamer.androidmedia;
 
 import android.hardware.Camera;
 

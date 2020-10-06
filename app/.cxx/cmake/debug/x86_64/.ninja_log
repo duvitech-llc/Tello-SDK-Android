@@ -1,0 +1,14 @@
+# ninja log v5
+2	144	623612598	build.ninja	5323b1b05ce18e1e
+0	5	0	clean	51fc49043a1d8360
+0	152	623612818	build.ninja	5323b1b05ce18e1e
+0	5	0	clean	51fc49043a1d8360
+1	149	623613941	build.ninja	5323b1b05ce18e1e
+0	6	0	clean	51fc49043a1d8360
+1	142	623617954	build.ninja	5323b1b05ce18e1e
+0	5	0	clean	51fc49043a1d8360
+0	6	0	clean	51fc49043a1d8360
+0	6	0	clean	51fc49043a1d8360
+0	7	0	clean	51fc49043a1d8360
+1	320	623619050	CMakeFiles/gstTelloVideo.dir/gstTelloVideo.c.o	a0e47f38ec58e4fd
+323	437	623619050	C:/CURRENT-WORK/duvitech/Tello-SDK-Android/app/build/intermediates/cmake/debug/obj/x86_64/libgstTelloVideo.so	9e61bd173717ffc9
